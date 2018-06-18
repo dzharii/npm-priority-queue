@@ -12,7 +12,7 @@ export class BinaryHeap<T> implements IBinaryHeap<T> {
             this.heapContainer = initialElements;
         }
         this.heapSize = this.heapContainer.length;
-        
+
         if (comparatorFn) {
             this.comparatorFn = comparatorFn;
         } else {
@@ -26,14 +26,14 @@ export class BinaryHeap<T> implements IBinaryHeap<T> {
     public size(): number {
         return this.heapSize;
     }
-    
+
     public toArray(): T[] {
         return this.heapContainer.concat();
     }
 
     public buildHeapArrayInplace(elements: T[], comparatorFn: IBinaryHeapComparatorFn<T> ) {
-        const middleIndex = (elements.length - 1) >> 1;
-        for (let i = middleIndex; i >= 0; i--) {
+        const boundaryParentIndex = (elements.length >> 1) - 1;
+        for (let i = boundaryParentIndex; i >= 0; i--) {
             this.siftDownInPlace(elements, i, comparatorFn);
         }
     }
@@ -41,11 +41,12 @@ export class BinaryHeap<T> implements IBinaryHeap<T> {
     public siftDownInPlace(elements: T[], currentElementIndex: number, doesFirstValueDominateOther: IBinaryHeapComparatorFn<T>) : void{
         const validCurrentElementIndex = 0 <= currentElementIndex && currentElementIndex < elements.length;
         if (!validCurrentElementIndex) throw new Error(`currentElementIndex is out of elements boundary`);
-        while(!this.isLeaf(elements, currentElementIndex)) {
-            let leftChildIndex = currentElementIndex << 1;  // same as 2 * currentElementIndex
+        let elementIsInTheRightPlace = false;
+        while(!this.isLeaf(elements, currentElementIndex) && !elementIsInTheRightPlace) {
+            let leftChildIndex = (currentElementIndex << 1) + 1;  // same as 2 * currentElementIndex + 1
             let rightChildIndex = leftChildIndex + 1;  // May be out of array boundary
-            let dominatorIndex = leftChildIndex; 
-            
+            let dominatorIndex = leftChildIndex;
+
             // Check if there is a right child and switch to right child if it dominates
             if (rightChildIndex < elements.length) {
                 if (doesFirstValueDominateOther(elements[rightChildIndex], elements[dominatorIndex])) {
@@ -55,6 +56,9 @@ export class BinaryHeap<T> implements IBinaryHeap<T> {
             if (doesFirstValueDominateOther(elements[dominatorIndex], elements[currentElementIndex])) {
                 this.swapInPlace(elements, dominatorIndex, currentElementIndex);
                 currentElementIndex = dominatorIndex;
+            }
+            else {
+                elementIsInTheRightPlace = true;
             }
         }
     }
@@ -66,12 +70,14 @@ export class BinaryHeap<T> implements IBinaryHeap<T> {
     }
 
     public isLeaf(elements: T[], index: number) : boolean {
-        let middleIndex = elements.length >> 1; // same as Math.floor(elements.length / 2)
-        return middleIndex >= index && index < elements.length;
+        const boundaryParentIndex = (elements.length >> 1) - 1;
+        const greaterThanLastParent = boundaryParentIndex < index;
+        const lessThanArrayLen = index < elements.length;
+        return  greaterThanLastParent && lessThanArrayLen;
     }
 
-   
 
 
-    
+
+
 }
