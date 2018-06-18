@@ -1,4 +1,4 @@
-import { IBinaryHeap, IBinaryHeapDominationComparatorFn, IBinaryHeapElementSearchPredicateFn } from "./abstract/IBinaryHeap";
+import { IBinaryHeap, IBinaryHeapDominationComparatorFn, IBinaryHeapElementSearchPredicateFn } from "./IBinaryHeap";
 
 export class BinaryHeap<T> implements IBinaryHeap<T> {
     private heapContainer: T[] = [];

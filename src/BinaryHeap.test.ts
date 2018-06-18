@@ -1,5 +1,5 @@
 import { BinaryHeap } from "./BinaryHeap";
-import { IBinaryHeapDominationComparatorFn } from "./abstract/IBinaryHeap";
+import { IBinaryHeapDominationComparatorFn } from "./IBinaryHeap";
 
 const testComparatorMax: IBinaryHeapDominationComparatorFn<number> = (value, otherValue) => value > otherValue
 const testComparatorMin: IBinaryHeapDominationComparatorFn<number> = (value, otherValue) => value < otherValue
