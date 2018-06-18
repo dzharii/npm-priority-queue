@@ -88,7 +88,7 @@ describe('BinaryHeap', () => {
         it('should return true for a left child element of array of 2 (only left clild) element', () => {
             let heap = new BinaryHeap<number>([1, 2], testComparatorMax);
             expect(heap.isLeaf(heap.toArray(), 1)).toBe(true)
-        });        
+        });
     });
 
     describe('swapInPlace', () => {
@@ -112,7 +112,7 @@ describe('BinaryHeap', () => {
             let target = [10, 5, 1];
             heap.siftDownInPlace(target, 0, testComparatorMin);
             expect(target).toEqual([1, 5, 10]);
-        });        
+        });
     });
 
     describe('buildHeapArrayInplace', () => {
@@ -127,7 +127,7 @@ describe('BinaryHeap', () => {
             let target = [1, 10, 5, 4, 1];
             heap.buildHeapArrayInplace(target, testComparatorMax);
             expect(target).toEqual([10, 4, 5, 1, 1]);
-        });        
+        });
     });
 
     describe('siftUpInPlace', () => {
@@ -142,7 +142,7 @@ describe('BinaryHeap', () => {
             let target = [3, 5, 6, 1];
             heap.siftUpInPlace(target, target.length - 1, testComparatorMin);
             expect(target).toEqual([1, 3, 6, 5]);
-        });        
+        });
     });
 
     describe('push', () => {
@@ -153,7 +153,7 @@ describe('BinaryHeap', () => {
             }
             expect(heap.toArray()).toEqual([10, 8, 3, 1, 5]);
         });
-        
+
     });
 
     describe('pop', () => {
@@ -165,7 +165,7 @@ describe('BinaryHeap', () => {
         it('should return element from a signle element heap', () => {
             let heap = new BinaryHeap<number>([10], testComparatorMin);
             expect(heap.pop()).toEqual(10);
-        });        
+        });
 
         it('should extract min element from MinHeap', () => {
             let heap = new BinaryHeap<number>([10, 8, 3, 1, 5], testComparatorMin);
@@ -198,6 +198,31 @@ describe('BinaryHeap', () => {
             let heap = new BinaryHeap<number>([10, 8, 3, 1, 5], testComparatorMax);
             expect(heap.peek()).toBe(10);
             expect(heap.toArray()[0]).toBe(10);
-        });        
+        });
+    });
+
+    describe('remove', () => {
+        it('should remove element from top of the heap', () => {
+            let heap = new BinaryHeap<number>([1, 3, 5, 8, 10], testComparatorMin);
+            expect(heap.remove(e => e === 1)).toBe(1);
+            expect(heap.toArray()).toEqual([3, 8, 5, 10]);
+        });
+
+        it('should remove left child element', () => {
+            let heap = new BinaryHeap<number>([1, 3, 5, 8, 10], testComparatorMin);
+            expect(heap.remove(e => e === 3)).toBe(3);
+            expect(heap.toArray()).toEqual([1, 8, 5, 10]);
+        });
+        it('should remove right child element', () => {
+            let heap = new BinaryHeap<number>([1, 3, 5, 8, 10], testComparatorMin);
+            expect(heap.remove(e => e === 5)).toBe(5);
+            expect(heap.toArray()).toEqual([1, 3, 10, 8]);
+        });
+        it('should remove last element', () => {
+            let heap = new BinaryHeap<number>([1, 3, 5, 8, 10], testComparatorMin);
+            expect(heap.remove(e => e === 10)).toBe(10);
+            expect(heap.toArray()).toEqual([1, 3, 5, 8]);
+        });
+
     });
 });

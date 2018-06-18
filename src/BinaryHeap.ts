@@ -1,4 +1,4 @@
-import { IBinaryHeap, IBinaryHeapDominationComparatorFn } from "./abstract/IBinaryHeap";
+import { IBinaryHeap, IBinaryHeapDominationComparatorFn, IBinaryHeapElementSearchPredicateFn } from "./abstract/IBinaryHeap";
 
 export class BinaryHeap<T> implements IBinaryHeap<T> {
     private heapContainer: T[] = [];
@@ -96,6 +96,31 @@ export class BinaryHeap<T> implements IBinaryHeap<T> {
 
     public peek(): T | undefined {
         return this.heapContainer[0];
+    }
+
+    /**
+     * Removes element from hrap
+     * @param elementFoundPredicate
+     *
+     * Comment: This algorithm is not super efficient and requires O(n) time in average case
+     */
+    public remove(elementFoundPredicate: IBinaryHeapElementSearchPredicateFn<T>): T | undefined {
+        if (!elementFoundPredicate) {
+            return void 0;
+        }
+
+        for (let i = 0; i < this.heapContainer.length; i++) {
+            if (elementFoundPredicate(this.heapContainer[i])) {
+                let lastElementIndex = this.heapContainer.length - 1;
+                this.swapInPlace(this.heapContainer, i, lastElementIndex);
+                let removedElement = this.heapContainer.pop();
+                if (this.heapContainer.length && i < this.heapContainer.length - 1) {
+                    this.siftDownInPlace(this.heapContainer, i, this.doesFirstValueDominateOtherCmp);
+                }
+                return removedElement;
+            }
+        }
+        return void 0;
     }
 
     public isEmpty(): boolean {
