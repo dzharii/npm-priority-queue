@@ -4,6 +4,10 @@ export class BinaryHeap<T> implements IBinaryHeap<T> {
     private heapContainer: T[] = [];
     private doesFirstValueDominateOtherCmp: IBinaryHeapDominationComparatorFn<T>;
 
+    public static create<T>(initialElements: T[], doesFirstValueDominateOtherCmp: IBinaryHeapDominationComparatorFn<T>): IBinaryHeap<T> {
+        return new BinaryHeap<T>(initialElements, doesFirstValueDominateOtherCmp);
+    }
+
     constructor(initialElements: T[], doesFirstValueDominateOtherCmp: IBinaryHeapDominationComparatorFn<T>) {
         if (initialElements && initialElements.length > 0) {
             this.heapContainer = initialElements;
