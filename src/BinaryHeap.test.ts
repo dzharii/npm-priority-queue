@@ -58,18 +58,75 @@ describe('BinaryHeap', () => {
         });
     });
 
-    describe('toArray()', () => {
+    describe('toArray', () => {
         it('should return current heap as array', () => {
             let heap = new BinaryHeap<number>([1, 10, 3], testComparatorMax);
             expect(heap.toArray()).toEqual([10, 1, 3]);
         });
     });
 
-    describe('size()', () => {
+    describe('size', () => {
         it('should return a valid size', () => {
             expect(new BinaryHeap<number>([], testComparatorMax).size()).toBe(0);
             expect(new BinaryHeap<number>([1, 2, 3], testComparatorMax).size()).toBe(3);
         });
     });
 
+    describe('isLeaf', () => {
+        it('should return true for an array of 1 element', () => {
+            let heap = new BinaryHeap<number>([1], testComparatorMax);
+            expect(heap.isLeaf(heap.toArray(), 0)).toBe(true)
+        });
+        it('should return false for a top element of  array of 3 element', () => {
+            let heap = new BinaryHeap<number>([1, 2, 3], testComparatorMax);
+            expect(heap.isLeaf(heap.toArray(), 0)).toBe(false)
+        });
+        it('should return false for a top element of  array of 2 (only left clild) element', () => {
+            let heap = new BinaryHeap<number>([1, 2], testComparatorMax);
+            expect(heap.isLeaf(heap.toArray(), 0)).toBe(false)
+        });
+        it('should return true for a left child element of array of 2 (only left clild) element', () => {
+            let heap = new BinaryHeap<number>([1, 2], testComparatorMax);
+            expect(heap.isLeaf(heap.toArray(), 1)).toBe(true)
+        });        
+    });
+
+    describe('swapInPlace', () => {
+        it('should swap to elements in array', () => {
+            let heap = new BinaryHeap<number>([], testComparatorMax);
+            let target = [1, 5];
+            heap.swapInPlace(target, 0, 1);
+            expect(target).toEqual([5, 1]);
+        });
+    });
+
+    describe('siftDownInPlace', () => {
+        it('should siftDown a min element in Max heap', () => {
+            let heap = new BinaryHeap<number>([], testComparatorMax);
+            let target = [1, 5, 10];
+            heap.siftDownInPlace(target, 0, testComparatorMax);
+            expect(target).toEqual([10, 5, 1]);
+        });
+        it('should siftDown a max element in Min heap', () => {
+            let heap = new BinaryHeap<number>([], testComparatorMin);
+            let target = [10, 5, 1];
+            heap.siftDownInPlace(target, 0, testComparatorMin);
+            expect(target).toEqual([1, 5, 10]);
+        });        
+    });
+
+    describe('buildHeapArrayInplace', () => {
+        it('should build a valid min heap', () => {
+            let heap = new BinaryHeap<number>([], testComparatorMin);
+            let target = [10, 5, 4, 1];
+            heap.buildHeapArrayInplace(target, testComparatorMin);
+            expect(target).toEqual([1, 5, 4, 10]);
+        });
+        it('should build a valid max heap', () => {
+            let heap = new BinaryHeap<number>([], testComparatorMax);
+            let target = [1, 10, 5, 4, 1];
+            heap.buildHeapArrayInplace(target, testComparatorMax);
+            expect(target).toEqual([10, 4, 5, 1, 1]);
+        });        
+    });
 });
