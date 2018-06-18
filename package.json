@@ -6,7 +6,6 @@
   "scripts": {
     "test": "node node_modules/jest/bin/jest.js",
     "testwatch": "node node_modules/jest/bin/jest.js --watch"
-
   },
   "devDependencies": {
     "@types/jest": "^23.1.0",
