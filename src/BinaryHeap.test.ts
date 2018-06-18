@@ -129,4 +129,30 @@ describe('BinaryHeap', () => {
             expect(target).toEqual([10, 4, 5, 1, 1]);
         });        
     });
+
+    describe('siftUpInPlace', () => {
+        it('should bring new max element to the top in MaxHeap', () => {
+            let heap = new BinaryHeap<number>([], testComparatorMax);
+            let target = [10, 5, 3, 100];
+            heap.siftUpInPlace(target, target.length - 1, testComparatorMax);
+            expect(target).toEqual([100, 10, 3, 5]);
+        });
+        it('should bring new min element to the top in MinHeap', () => {
+            let heap = new BinaryHeap<number>([], testComparatorMin);
+            let target = [3, 5, 6, 1];
+            heap.siftUpInPlace(target, target.length - 1, testComparatorMin);
+            expect(target).toEqual([1, 3, 6, 5]);
+        });        
+    });
+
+    describe('add', () => {
+        it('should allow to build MaxHeap', () => {
+            let heap = new BinaryHeap<number>([], testComparatorMax);
+            for (let e of [10, 5, 3, 1, 8]) {
+                heap.add(e);
+            }
+            expect(heap.toArray()).toEqual([10, 8, 3, 1, 5]);
+        });
+        
+    });
 });

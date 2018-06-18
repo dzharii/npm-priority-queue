@@ -4,4 +4,5 @@ export interface IBinaryHeapDominationComparatorFn<T> {
 export interface IBinaryHeap<T> {
     size(): number;
     toArray(): T[]
+    add(element: T): void
 }

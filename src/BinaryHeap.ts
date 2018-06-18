@@ -2,15 +2,13 @@ import { IBinaryHeap, IBinaryHeapDominationComparatorFn } from "./abstract/IBina
 
 export class BinaryHeap<T> implements IBinaryHeap<T> {
     private heapContainer: T[] = [];
-    private heapSize: number = 0;
     private doesFirstValueDominateOtherCmp: IBinaryHeapDominationComparatorFn<T>;
 
     constructor(initialElements: T[], doesFirstValueDominateOtherCmp: IBinaryHeapDominationComparatorFn<T>) {
         if (initialElements && initialElements.length > 0) {
             this.heapContainer = initialElements;
         }
-        this.heapSize = this.heapContainer.length;
-
+        
         if (doesFirstValueDominateOtherCmp) {
             this.doesFirstValueDominateOtherCmp = doesFirstValueDominateOtherCmp;
         } else {
@@ -22,7 +20,7 @@ export class BinaryHeap<T> implements IBinaryHeap<T> {
         }
     }
     public size(): number {
-        return this.heapSize;
+        return this.heapContainer.length;
     }
 
     public toArray(): T[] {
@@ -58,6 +56,27 @@ export class BinaryHeap<T> implements IBinaryHeap<T> {
             else {
                 elementIsInTheRightPlace = true;
             }
+        }
+    }
+
+    public siftUpInPlace(elements: T[], currentElementIndex: number, doesFirstValueDominateOtherCmp: IBinaryHeapDominationComparatorFn<T>) : void {
+        let elementIsInTheRightPlace = false;
+        while(currentElementIndex != 0 && !elementIsInTheRightPlace) {
+            let parentIndex = (currentElementIndex - 1) >> 1;
+            if (doesFirstValueDominateOtherCmp(elements[currentElementIndex], elements[parentIndex])) {
+                this.swapInPlace(elements, currentElementIndex, parentIndex);
+                currentElementIndex = parentIndex;
+            }
+            else {
+                elementIsInTheRightPlace = true;
+            }
+        }
+    }
+
+    public add(element: T) : void {
+        this.heapContainer.push(element);
+        if (this.size() > 1) {
+            this.siftUpInPlace(this.heapContainer, this.heapContainer.length - 1, this.doesFirstValueDominateOtherCmp);
         }
     }
 
