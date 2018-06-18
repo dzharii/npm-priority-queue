@@ -157,6 +157,16 @@ describe('BinaryHeap', () => {
     });
 
     describe('pop', () => {
+        it('should return undefined if called on empty heap', () => {
+            let heap = new BinaryHeap<number>([], testComparatorMin);
+            expect(heap.pop()).toEqual(void 0);
+        });
+
+        it('should return element from a signle element heap', () => {
+            let heap = new BinaryHeap<number>([10], testComparatorMin);
+            expect(heap.pop()).toEqual(10);
+        });        
+
         it('should extract min element from MinHeap', () => {
             let heap = new BinaryHeap<number>([10, 8, 3, 1, 5], testComparatorMin);
             let actual = [];
