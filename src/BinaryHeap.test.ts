@@ -145,14 +145,34 @@ describe('BinaryHeap', () => {
         });        
     });
 
-    describe('add', () => {
+    describe('push', () => {
         it('should allow to build MaxHeap', () => {
             let heap = new BinaryHeap<number>([], testComparatorMax);
             for (let e of [10, 5, 3, 1, 8]) {
-                heap.add(e);
+                heap.push(e);
             }
             expect(heap.toArray()).toEqual([10, 8, 3, 1, 5]);
         });
         
     });
+
+    describe('pop', () => {
+        it('should extract min element from MinHeap', () => {
+            let heap = new BinaryHeap<number>([10, 8, 3, 1, 5], testComparatorMin);
+            let actual = [];
+            while (!heap.isEmpty()) {
+                actual.push(heap.pop());
+            }
+            expect(actual).toEqual([1, 3, 5, 8, 10]);
+        });
+
+        it('should extract max element from MaxHeap', () => {
+            let heap = new BinaryHeap<number>([10, 8, 3, 1, 5], testComparatorMax);
+            let actual = [];
+            while (!heap.isEmpty()) {
+                actual.push(heap.pop());
+            }
+            expect(actual).toEqual([10, 8, 5, 3, 1]);
+        });
+    });    
 });

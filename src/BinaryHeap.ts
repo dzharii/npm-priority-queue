@@ -8,7 +8,7 @@ export class BinaryHeap<T> implements IBinaryHeap<T> {
         if (initialElements && initialElements.length > 0) {
             this.heapContainer = initialElements;
         }
-        
+
         if (doesFirstValueDominateOtherCmp) {
             this.doesFirstValueDominateOtherCmp = doesFirstValueDominateOtherCmp;
         } else {
@@ -73,11 +73,29 @@ export class BinaryHeap<T> implements IBinaryHeap<T> {
         }
     }
 
-    public add(element: T) : void {
+    public push(element: T) : void {
         this.heapContainer.push(element);
         if (this.size() > 1) {
             this.siftUpInPlace(this.heapContainer, this.heapContainer.length - 1, this.doesFirstValueDominateOtherCmp);
         }
+    }
+
+    public pop(): T | undefined {
+        if (this.heapContainer.length === 0) {
+            return void 0;
+        }
+        else if (this.heapContainer.length === 1) {
+            let element = this.heapContainer.pop();
+            return element;
+        }
+        this.swapInPlace(this.heapContainer, 0, this.heapContainer.length - 1);
+        let result = this.heapContainer.pop();
+        this.siftDownInPlace(this.heapContainer, 0, this.doesFirstValueDominateOtherCmp);
+        return result;
+    }
+
+    public isEmpty(): boolean {
+        return this.heapContainer.length === 0;
     }
 
     public swapInPlace(elements: T[], swapIndexA: number, swapIndexB: number) {
