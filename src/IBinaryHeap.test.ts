@@ -3,12 +3,12 @@ import { BinaryHeap } from "./BinaryHeap";
 
 // Number comparators:
 const CmpNumMax: IBinaryHeapDominationComparatorFn<number> = (value, otherValue) => value > otherValue;
-const CmpNumMin: IBinaryHeapDominationComparatorFn<number> = (value, otherValue) => value < otherValue;
+// for future use // const CmpNumMin: IBinaryHeapDominationComparatorFn<number> = (value, otherValue) => value < otherValue;
 
 // Object comparators
 
 const CmpPersonMax: IBinaryHeapDominationComparatorFn<IPerson> = (value, otherValue) => value.favoriteNumber > otherValue.favoriteNumber;
-const CmpPersonMin: IBinaryHeapDominationComparatorFn<IPerson> = (value, otherValue) => value.favoriteNumber < otherValue.favoriteNumber;
+// for future use // const CmpPersonMin: IBinaryHeapDominationComparatorFn<IPerson> = (value, otherValue) => value.favoriteNumber < otherValue.favoriteNumber;
 
 describe('IBinaryHeap properties test', () => {
     describe('create', () => {

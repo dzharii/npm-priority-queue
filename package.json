@@ -1,9 +1,12 @@
 {
-  "name": "priority-queue",
-  "version": "0.1.0",
+  "name": "dz-priority-queue",
+  "version": "0.0.1",
   "private": false,
+  "main": "./index.js",
+  "types": "./typings/index.d.ts",
   "dependencies": {},
   "scripts": {
+    "build": "node node_modules/typescript/bin/tsc",
     "test": "node node_modules/jest/bin/jest.js",
     "testwatch": "node node_modules/jest/bin/jest.js --watch"
   },
