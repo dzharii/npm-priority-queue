@@ -1,8 +1,8 @@
 import { BinaryHeap } from "./BinaryHeap";
-import { IBinaryHeapComparatorFn } from "./abstract/IBinaryHeap";
+import { IBinaryHeapDominationComparatorFn } from "./abstract/IBinaryHeap";
 
-const testComparatorMax: IBinaryHeapComparatorFn<number> = (value, otherValue) => value > otherValue
-const testComparatorMin: IBinaryHeapComparatorFn<number> = (value, otherValue) => value < otherValue
+const testComparatorMax: IBinaryHeapDominationComparatorFn<number> = (value, otherValue) => value > otherValue
+const testComparatorMin: IBinaryHeapDominationComparatorFn<number> = (value, otherValue) => value < otherValue
 
 describe('BinaryHeap', () => {
     describe('constructor', () => {
