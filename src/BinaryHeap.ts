@@ -94,6 +94,10 @@ export class BinaryHeap<T> implements IBinaryHeap<T> {
         return result;
     }
 
+    public peek(): T | undefined {
+        return this.heapContainer[0];
+    }
+
     public isEmpty(): boolean {
         return this.heapContainer.length === 0;
     }

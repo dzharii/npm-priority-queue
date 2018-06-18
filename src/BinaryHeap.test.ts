@@ -174,6 +174,7 @@ describe('BinaryHeap', () => {
                 actual.push(heap.pop());
             }
             expect(actual).toEqual([1, 3, 5, 8, 10]);
+            expect(heap.isEmpty()).toBe(true);
         });
 
         it('should extract max element from MaxHeap', () => {
@@ -183,6 +184,20 @@ describe('BinaryHeap', () => {
                 actual.push(heap.pop());
             }
             expect(actual).toEqual([10, 8, 5, 3, 1]);
+            expect(heap.isEmpty()).toBe(true);
         });
-    });    
+    });
+    describe('peek', () => {
+        it('should return current min element from MinHeap, but do not remove it from heap', () => {
+            let heap = new BinaryHeap<number>([10, 8, 3, 1, 5], testComparatorMin);
+            expect(heap.peek()).toBe(1);
+            expect(heap.toArray()[0]).toBe(1);
+        });
+
+        it('should return current min element from MinHeap, but do not remove it from heap', () => {
+            let heap = new BinaryHeap<number>([10, 8, 3, 1, 5], testComparatorMax);
+            expect(heap.peek()).toBe(10);
+            expect(heap.toArray()[0]).toBe(10);
+        });        
+    });
 });
