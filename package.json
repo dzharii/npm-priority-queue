@@ -1,0 +1,32 @@
+{
+  "name": "priority-queue",
+  "version": "0.1.0",
+  "private": false,
+  "dependencies": {},
+  "scripts": {
+    "test": "node node_modules/jest/bin/jest.js",
+    "testwatch": "node node_modules/jest/bin/jest.js --watch"
+
+  },
+  "devDependencies": {
+    "@types/jest": "^23.1.0",
+    "@types/node": "^10.3.3",
+    "jest": "^23.1.0",
+    "ts-jest": "^22.4.6",
+    "typescript": "^2.9.2"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+}
