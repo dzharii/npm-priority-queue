@@ -3,12 +3,12 @@ Yet another priority queue (MinMax Heap) implementation in TypeScript
 
 ## Installation
 
-`npm i dz-priority-queue` or 
+`npm i dz-priority-queue` or
 `npm i dz-priority-queue --save`
 
-## Example 
+## Example
 
-```
+```typescript
 
 import {
     PriorityQueue,
