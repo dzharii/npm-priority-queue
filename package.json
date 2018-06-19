@@ -1,8 +1,8 @@
 {
   "name": "dz-priority-queue",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
-  "main": "./build/index.js",
+  "main": "./javascript/index.js",
   "types": "./typings/index.d.ts",
   "homepage": "https://github.com/dzharii/npm-priority-queue",
   "repository" : {
